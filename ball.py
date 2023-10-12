@@ -1,6 +1,5 @@
+import random
 from turtle import Turtle
-
-N = 270
 
 
 class Ball(Turtle):
@@ -8,9 +7,8 @@ class Ball(Turtle):
         super().__init__()
         self.penup()
         self.shape('circle')
-        # self.goto(random.randint(-N, N), random.randint(-N, N))
-        self.x_speed = -10
-        self.y_speed = -10
+        self.x_speed = random.choice([-10, 10])
+        self.y_speed = random.choice([-10, 10])
 
     def move(self):
         self.goto(self.xcor() + self.x_speed, self.ycor() + self.y_speed)
@@ -22,3 +20,6 @@ class Ball(Turtle):
     def bounce_paddle(self):
         self.x_speed *= -1
         print('paddle')
+
+    def to_center(self):
+        self.goto(0, 0)

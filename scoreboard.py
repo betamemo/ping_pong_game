@@ -23,3 +23,8 @@ class Scoreboard(Turtle):
         self.right_score += 10
         self.clear()
         self.print_score()
+
+    def print_winner(self, winner_name):
+        self.goto(0,0)
+        self.write(f'{winner_name} win!',align='center',font=('Arial',100, 'normal'))
+

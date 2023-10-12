@@ -5,8 +5,12 @@ from ball import Ball
 from paddle import Paddle
 from scoreboard import Scoreboard
 
+WIN_SCORE = 10
+
 right_paddle = Paddle((330, 0))
 left_paddle = Paddle((-330, -100))
+
+ball = Ball()
 
 scoreboard = Scoreboard()
 screen = Screen()
@@ -19,9 +23,9 @@ screen.onkeypress(fun=right_paddle.go_down, key='Down')
 screen.onkeypress(fun=left_paddle.go_up, key='w')
 screen.onkeypress(fun=left_paddle.go_down, key='s')
 
-ball = Ball()
+game_on = True
 
-while True:
+while game_on:
     time.sleep(0.1)  # ball's speed
     ball.move()
     screen.update()
@@ -49,3 +53,14 @@ while True:
     if ball.xcor() > 380:
         scoreboard.update_left()  # update score
         ball.to_center()  # place ball to the center
+
+    if scoreboard.left_score >= WIN_SCORE:
+        scoreboard.print_winner('Left')
+        game_on = False
+
+    if scoreboard.right_score >= WIN_SCORE:
+        scoreboard.print_winner('Right')
+        game_on = False
+
+# screen.exitonclick()
+screen.mainloop()

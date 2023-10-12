@@ -3,10 +3,12 @@ from turtle import Screen
 
 from ball import Ball
 from paddle import Paddle
+from scoreboard import Scoreboard
 
 right_paddle = Paddle((330, 0))
 left_paddle = Paddle((-330, -100))
 
+scoreboard = Scoreboard()
 screen = Screen()
 screen.setup(800, 600)
 screen.title('Ping Pong Game')
@@ -29,11 +31,21 @@ while True:
         ball.bounce_wall()
 
     # detect collision with left paddle
-    if (ball.xcor() <= -310 and
+    if (ball.xcor() <= -305 and
             (left_paddle.ycor() - 50 <= ball.ycor() <= left_paddle.ycor() + 50)):
         ball.bounce_paddle()
 
     # detect collision with right paddle
-    if (ball.xcor() >= 310 and
+    if (ball.xcor() >= 305 and
             (right_paddle.ycor() - 50 <= ball.ycor() <= right_paddle.ycor() + 50)):
         ball.bounce_paddle()
+
+    # right win
+    if ball.xcor() < -380:
+        scoreboard.update_right()  # update score
+        ball.to_center()  # place ball to the center
+
+    # left win
+    if ball.xcor() > 380:
+        scoreboard.update_left()  # update score
+        ball.to_center()  # place ball to the center

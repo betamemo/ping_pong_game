@@ -15,11 +15,9 @@ class Ball(Turtle):
 
     def bounce_wall(self):
         self.y_speed *= -1
-        print('wall')
 
     def bounce_paddle(self):
         self.x_speed *= -1
-        print('paddle')
 
     def to_center(self):
         self.goto(0, 0)
